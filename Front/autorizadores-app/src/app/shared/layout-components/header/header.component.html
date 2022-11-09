@@ -1,0 +1,195 @@
+<!--app header-->
+<div class="app-header header">
+  <div class="container-fluid main-container">
+    <div class="d-flex">
+      <a class="header-brand" routerLink="/hr-dashboard/dashboard">
+        <img
+          src="./assets/images/brand/logo-super-food.png"
+          style="width:120px;"
+          class="header-brand-img desktop-lgo"
+          alt="Dayonelogo"
+        />
+        <img
+          src="./assets/images/brand/logo-super-food.png"
+          class="header-brand-img dark-logo"
+          style="width:120px;"
+          alt="Dayonelogo"
+        />
+        <img
+          src="./assets/images/brand/logo-super-food-1.png"
+          style="width:60px;"
+          class="header-brand-img mobile-logo"
+          alt="Dayonelogo"
+        />
+        <img
+          src="./assets/images/brand/logo-super-food-1.png"
+          class="header-brand-img darkmobile-logo"
+          style="width:60px;"
+          alt="Dayonelogo"
+        />
+      </a>
+      <div class="app-sidebar__toggle" appSidemenuToggle>
+        <a class="open-toggle" href="javascript:;">
+          <i class="feather feather-menu"></i>
+        </a>
+        <a class="close-toggle" href="javascript:;">
+          <i class="feather feather-x"></i>
+        </a>
+      </div>
+
+      <div class="d-flex order-lg-2 my-auto ms-auto">
+        <button
+          class="navbar-toggler nav-link icon navresponsive-toggler vertical-icon ms-auto"
+          type="button"
+          (click)="collapse.toggle()"
+          [attr.aria-expanded]="!isCollapsed"
+        >
+          <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+        </button>
+        <div
+          class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0"
+        >
+          <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent-4"
+            #collapse="ngbCollapse"
+            [(ngbCollapse)]="isCollapsed"
+          >
+            <div class="d-flex ms-auto">
+              <a
+                class="nav-link my-auto icon p-0 nav-link-lg d-md-none navsearch"
+                href="javascript:;"
+                appToggleSearch
+              >
+                <i class="feather feather-search search-icon header-icon"></i>
+              </a>
+              <div ngbDropdown class="profile-dropdown">
+                <a
+                  href="javascript:;"
+                  class="nav-link pe-1 ps-0 leading-none"
+                  ngbDropdownToggle
+                >
+                  <span>
+                    <img
+                      src="./assets/images/users/16.jpg"
+                      alt="img"
+                      class="avatar avatar-md bradius"
+                    />
+                  </span>
+                </a>
+                <div
+                  ngbDropdownMenu
+                  class="dropdown-menu-end dropdown-menu-arrow animated"
+                >
+                  <div class="p-3 text-center border-bottom">
+                    <a
+                      href="javascript:;"
+                      routerLink="/pages/profile/profile01"
+                      class="text-center user pb-0 font-weight-bold"
+                      >John Thomson</a
+                    >
+                    <p class="text-center user-semi-title">App Developer</p>
+                  </div>
+                  <a
+                    ngbDropdownItem
+                    class="d-flex"
+                    href="javascript:;"
+                    routerLink="/pages/profile/profile01"
+                  >
+                    <i class="feather feather-user me-3 fs-16 my-auto"></i>
+                    <div class="mt-1">Profile</div>
+                  </a>
+                  <a
+                    ngbDropdownItem
+                    class="d-flex"
+                    href="javascript:;"
+                    routerLink="/pages/edit-profile"
+                  >
+                    <i class="feather feather-settings me-3 fs-16 my-auto"></i>
+                    <div class="mt-1">Settings</div>
+                  </a>
+                  <a
+                    ngbDropdownItem
+                    class="d-flex"
+                    href="javascript:;"
+                    routerLink="/chat"
+                  >
+                    <i class="feather feather-mail me-3 fs-16 my-auto"></i>
+                    <div class="mt-1">Messages</div>
+                  </a>
+                  <a
+                    ngbDropdownItem
+                    class="d-flex"
+                    href="javascript:;"
+                    (click)="open(content)"
+                  >
+                    <i class="feather feather-edit-2 me-3 fs-16 my-auto"></i>
+                    <div class="mt-1">Change Password</div>
+                  </a>
+                  <a
+                    ngbDropdownItem
+                    class="d-flex"
+                    href="javascript:;"
+                    (click)="signout()"
+                  >
+                    <i class="feather feather-power me-3 fs-16 my-auto"></i>
+                    <div class="mt-1">Sign Out</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/app header-->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Change Password</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span class="nav-link">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="form-label">New Password</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="password"
+        value=""
+      />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Confirm New Password</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a
+      href="javascript:;"
+      class="btn btn-outline-primary me-2"
+      (click)="modal.dismiss('Cross click')"
+      data-bs-dismiss="modal"
+      >Close</a
+    >
+    <a
+      href="javascript:;"
+      class="btn btn-success"
+      (click)="modal.dismiss('Cross click')"
+      >Confirm</a
+    >
+  </div>
+</ng-template>

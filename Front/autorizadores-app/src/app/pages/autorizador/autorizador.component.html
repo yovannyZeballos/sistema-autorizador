@@ -1,0 +1,236 @@
+<app-page-header [title]="'Creación de autorizadores para caja'"></app-page-header>
+
+<div class="row row-sm">
+  <div class="col-xl-12">
+    <div class="card overflow-hidden" [(ngbCollapse)]="isClosed1">
+      <div class="card-header bg-primary">
+        <h3 class="card-title text-white">Colaboradores activos</h3>
+        <div class="card-options">
+          <a href="javascript:;" class="card-options-collapse" (click)="Collapsetoggle1()"
+            [attr.aria-expanded]="!isCollapsed1">
+            <i class="text-white fe fe-chevron-{{
+                !isCollapsed1 ? 'up' : 'down'
+              }}"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card-body" [(ngbCollapse)]="isCollapsed1">
+        <div class="row">
+          <div class="col-xl-3">
+            <input class="form-control mb-4" (keyup)="applyFilter($event)" placeholder="Buscar" type="text" />
+          </div>
+          <div class="col-xl-9">
+            <div class="d-flex justify-content-end">
+              <a href="javascript:;" class="btn btn-info">Asignar Autorizador</a>
+            </div>
+          </div>
+          <div class="col-xl-12">
+            <div class="table-responsive">
+              <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8 table-striped">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle1() : null"
+                      [checked]="selection1.hasValue() && isAllSelected1()" [indeterminate]="
+                        selection1.hasValue() && !isAllSelected1()
+                      " [aria-label]="checkboxLabel1()">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection1.toggle(row) : null"
+                      [checked]="selection1.isSelected(row)" [aria-label]="checkboxLabel1(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="codigo">
+                  <th mat-header-cell *matHeaderCellDef>Código</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.codigo }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="paterno">
+                  <th mat-header-cell *matHeaderCellDef>A. Paterno</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.paterno }}
+                  </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="materno">
+                  <th mat-header-cell *matHeaderCellDef>A. Materno</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.materno }}
+                  </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.nombre }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef>Estado</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.estado }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="documento">
+                  <th mat-header-cell *matHeaderCellDef>Documento</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.documento }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="ingreso">
+                  <th mat-header-cell *matHeaderCellDef>F. Ingreso</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.ingreso }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns1" (click)="selection1.toggle(row)"></tr>
+              </table>
+              <mat-paginator #paginator1 [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-sm">
+  <div class="col-xl-12">
+    <div class="card overflow-hidden" [(ngbCollapse)]="isClosed2">
+      <div class="card-header bg-primary">
+        <h3 class="card-title text-white">
+          Colaboradores con autorizadores activos
+        </h3>
+        <div class="card-options">
+          <a href="javascript:;" class="card-options-collapse" (click)="Collapsetoggle2()"
+            [attr.aria-expanded]="!isCollapsed2">
+            <i class="text-white fe fe-chevron-{{
+                !isCollapsed2 ? 'up' : 'down'
+              }}"></i>
+          </a>
+        </div>
+      </div>
+
+      <!--  -->
+
+      <div class="card-body" [(ngbCollapse)]="isCollapsed2">
+        <div class="row">
+          <div class="col-xl-3">
+            <input class="form-control mb-4" (keyup)="applyFilter2($event)" placeholder="Buscar" type="text" />
+          </div>
+          <div class="col-xl-9">
+            <div class="d-flex justify-content-end">
+              <a href="javascript:;" class="btn btn-info">Generar Archivo</a>
+              <a href="javascript:;" class="btn btn-info ms-2">Eliminar Autorizador</a>
+              <a href="javascript:;" class="btn btn-info ms-2">Buscar Empleado</a>
+            </div>
+          </div>
+          <div class="col-xl-12">
+            <div class="table-responsive">
+              <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 table-striped">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle2() : null"
+                      [checked]="selection2.hasValue() && isAllSelected2()"
+                      [indeterminate]="selection2.hasValue() && !isAllSelected2()" [aria-label]="checkboxLabel2()">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection2.toggle(row) : null"
+                      [checked]="selection2.isSelected(row)" [aria-label]="checkboxLabel2(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="autorizador">
+                  <th mat-header-cell *matHeaderCellDef>Autorizador</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.autorizador }}
+                  </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="codigo">
+                  <th mat-header-cell *matHeaderCellDef>Código</th>
+                  <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="paterno">
+                  <th mat-header-cell *matHeaderCellDef>A. Paterno</th>
+                  <td mat-cell *matCellDef="let element">{{ element.paterno }}</td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="materno">
+                  <th mat-header-cell *matHeaderCellDef>A. Materno</th>
+                  <td mat-cell *matCellDef="let element">{{ element.materno }}</td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                  <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef>Estado</th>
+                  <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="documento">
+                  <th mat-header-cell *matHeaderCellDef>Documento</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.documento }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="ingreso">
+                  <th mat-header-cell *matHeaderCellDef>F. Ingreso</th>
+                  <td mat-cell *matCellDef="let element">{{ element.ingreso }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="registro">
+                  <th mat-header-cell *matHeaderCellDef>U. Registro</th>
+                  <td mat-cell *matCellDef="let element">{{ element.registro }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="tarjeta">
+                  <th mat-header-cell *matHeaderCellDef>BIN trajeta</th>
+                  <td mat-cell *matCellDef="let element">{{ element.tarjeta }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="impresa">
+                  <th mat-header-cell *matHeaderCellDef>Tarjeta impresa</th>
+                  <td mat-cell *matCellDef="let element">{{ element.impresa }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns2" (click)="selection2.toggle(row)"></tr>
+              </table>
+              <mat-paginator #paginator2 [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
